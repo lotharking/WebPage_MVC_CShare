@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Fechas.Models.citas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Como citar</h2>
+
+<p>
+    
+
+    @while (true)
+    {
+        <b>@ViewBag.formato</b>
+        break;
+    }
+</p>
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Num)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Formato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Revision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuando_usar)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Detalles)
+        </th>*@
+        @*<th></th>*@
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Num)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Formato)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Revision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cuando_usar)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Detalles)
+        </td>*@
+        <td>
+            <ul>
+                <li>@Html.ActionLink("Quieres saber mas?", "Vista", "Citas")</li>
+            </ul>
+        </td>
+    </tr>
+}
+
+</table>

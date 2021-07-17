@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DoctorTesisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="citas">
+          <Key>
+            <PropertyRef Name="Formato" />
+          </Key>
+          <Property Name="Num" Type="int" Nullable="false" />
+          <Property Name="Formato" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Revision" Type="int" Nullable="false" />
+          <Property Name="Cuando_usar" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Detalles" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="detalles">
+          <Key>
+            <PropertyRef Name="Formato" />
+          </Key>
+          <Property Name="Formato" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="4000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fechas">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dia" Type="int" Nullable="false" />
+          <Property Name="Mes" Type="int" Nullable="false" />
+          <Property Name="Año" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__detalles__Format__3B75D760">
+          <End Role="citas" Type="Self.citas" Multiplicity="1" />
+          <End Role="detalles" Type="Self.detalles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="citas">
+              <PropertyRef Name="Formato" />
+            </Principal>
+            <Dependent Role="detalles">
+              <PropertyRef Name="Formato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DoctorTesisModelStoreContainer">
+          <EntitySet Name="citas" EntityType="Self.citas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detalles" EntityType="Self.detalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fechas" EntityType="Self.fechas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__detalles__Format__3B75D760" Association="Self.FK__detalles__Format__3B75D760">
+            <End Role="citas" EntitySet="citas" />
+            <End Role="detalles" EntitySet="detalles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DoctorTesisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="citas">
+          <Key>
+            <PropertyRef Name="Formato" />
+          </Key>
+          <Property Name="Num" Type="Int32" Nullable="false" />
+          <Property Name="Formato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Revision" Type="Int32" Nullable="false" />
+          <Property Name="Cuando_usar" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Detalles" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="detalles1" Relationship="Self.FK__detalles__Format__3B75D760" FromRole="citas" ToRole="detalles" />
+        </EntityType>
+        <EntityType Name="detalles">
+          <Key>
+            <PropertyRef Name="Formato" />
+          </Key>
+          <Property Name="Formato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="citas" Relationship="Self.FK__detalles__Format__3B75D760" FromRole="detalles" ToRole="citas" />
+        </EntityType>
+        <EntityType Name="fechas">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dia" Type="Int32" Nullable="false" />
+          <Property Name="Mes" Type="Int32" Nullable="false" />
+          <Property Name="Año" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__detalles__Format__3B75D760">
+          <End Role="citas" Type="Self.citas" Multiplicity="1" />
+          <End Role="detalles" Type="Self.detalles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="citas">
+              <PropertyRef Name="Formato" />
+            </Principal>
+            <Dependent Role="detalles">
+              <PropertyRef Name="Formato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DoctorTesisEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="citas" EntityType="Self.citas" />
+          <EntitySet Name="detalles" EntityType="Self.detalles" />
+          <EntitySet Name="fechas" EntityType="Self.fechas" />
+          <AssociationSet Name="FK__detalles__Format__3B75D760" Association="Self.FK__detalles__Format__3B75D760">
+            <End Role="citas" EntitySet="citas" />
+            <End Role="detalles" EntitySet="detalles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DoctorTesisModelStoreContainer" CdmEntityContainer="DoctorTesisEntities">
+          <EntitySetMapping Name="citas">
+            <EntityTypeMapping TypeName="DoctorTesisModel.citas">
+              <MappingFragment StoreEntitySet="citas">
+                <ScalarProperty Name="Num" ColumnName="Num" />
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Revision" ColumnName="Revision" />
+                <ScalarProperty Name="Cuando_usar" ColumnName="Cuando_usar" />
+                <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detalles">
+            <EntityTypeMapping TypeName="DoctorTesisModel.detalles">
+              <MappingFragment StoreEntitySet="detalles">
+                <ScalarProperty Name="Formato" ColumnName="Formato" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fechas">
+            <EntityTypeMapping TypeName="DoctorTesisModel.fechas">
+              <MappingFragment StoreEntitySet="fechas">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

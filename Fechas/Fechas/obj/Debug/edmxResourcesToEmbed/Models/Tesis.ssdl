@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DoctorTesisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="citas">
+    <Key>
+      <PropertyRef Name="Formato" />
+    </Key>
+    <Property Name="Num" Type="int" Nullable="false" />
+    <Property Name="Formato" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Revision" Type="int" Nullable="false" />
+    <Property Name="Cuando_usar" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Detalles" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="detalles">
+    <Key>
+      <PropertyRef Name="Formato" />
+    </Key>
+    <Property Name="Formato" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="4000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fechas">
+    <Key>
+      <PropertyRef Name="Nombre" />
+    </Key>
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Dia" Type="int" Nullable="false" />
+    <Property Name="Mes" Type="int" Nullable="false" />
+    <Property Name="Año" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__detalles__Format__3B75D760">
+    <End Role="citas" Type="Self.citas" Multiplicity="1" />
+    <End Role="detalles" Type="Self.detalles" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="citas">
+        <PropertyRef Name="Formato" />
+      </Principal>
+      <Dependent Role="detalles">
+        <PropertyRef Name="Formato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DoctorTesisModelStoreContainer">
+    <EntitySet Name="citas" EntityType="Self.citas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="detalles" EntityType="Self.detalles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fechas" EntityType="Self.fechas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__detalles__Format__3B75D760" Association="Self.FK__detalles__Format__3B75D760">
+      <End Role="citas" EntitySet="citas" />
+      <End Role="detalles" EntitySet="detalles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

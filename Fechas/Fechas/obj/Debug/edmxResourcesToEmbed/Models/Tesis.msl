@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DoctorTesisModelStoreContainer" CdmEntityContainer="DoctorTesisEntities">
+    <EntitySetMapping Name="citas">
+      <EntityTypeMapping TypeName="DoctorTesisModel.citas">
+        <MappingFragment StoreEntitySet="citas">
+          <ScalarProperty Name="Num" ColumnName="Num" />
+          <ScalarProperty Name="Formato" ColumnName="Formato" />
+          <ScalarProperty Name="Revision" ColumnName="Revision" />
+          <ScalarProperty Name="Cuando_usar" ColumnName="Cuando_usar" />
+          <ScalarProperty Name="Detalles" ColumnName="Detalles" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="detalles">
+      <EntityTypeMapping TypeName="DoctorTesisModel.detalles">
+        <MappingFragment StoreEntitySet="detalles">
+          <ScalarProperty Name="Formato" ColumnName="Formato" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fechas">
+      <EntityTypeMapping TypeName="DoctorTesisModel.fechas">
+        <MappingFragment StoreEntitySet="fechas">
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Dia" ColumnName="Dia" />
+          <ScalarProperty Name="Mes" ColumnName="Mes" />
+          <ScalarProperty Name="Año" ColumnName="Año" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

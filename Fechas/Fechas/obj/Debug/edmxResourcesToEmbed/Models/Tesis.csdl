@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DoctorTesisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="citas">
+    <Key>
+      <PropertyRef Name="Formato" />
+    </Key>
+    <Property Name="Num" Type="Int32" Nullable="false" />
+    <Property Name="Formato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Revision" Type="Int32" Nullable="false" />
+    <Property Name="Cuando_usar" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Detalles" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="detalles1" Relationship="Self.FK__detalles__Format__3B75D760" FromRole="citas" ToRole="detalles" />
+  </EntityType>
+  <EntityType Name="detalles">
+    <Key>
+      <PropertyRef Name="Formato" />
+    </Key>
+    <Property Name="Formato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="citas" Relationship="Self.FK__detalles__Format__3B75D760" FromRole="detalles" ToRole="citas" />
+  </EntityType>
+  <EntityType Name="fechas">
+    <Key>
+      <PropertyRef Name="Nombre" />
+    </Key>
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dia" Type="Int32" Nullable="false" />
+    <Property Name="Mes" Type="Int32" Nullable="false" />
+    <Property Name="Año" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__detalles__Format__3B75D760">
+    <End Role="citas" Type="Self.citas" Multiplicity="1" />
+    <End Role="detalles" Type="Self.detalles" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="citas">
+        <PropertyRef Name="Formato" />
+      </Principal>
+      <Dependent Role="detalles">
+        <PropertyRef Name="Formato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DoctorTesisEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="citas" EntityType="Self.citas" />
+    <EntitySet Name="detalles" EntityType="Self.detalles" />
+    <EntitySet Name="fechas" EntityType="Self.fechas" />
+    <AssociationSet Name="FK__detalles__Format__3B75D760" Association="Self.FK__detalles__Format__3B75D760">
+      <End Role="citas" EntitySet="citas" />
+      <End Role="detalles" EntitySet="detalles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
